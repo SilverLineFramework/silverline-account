@@ -18,6 +18,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
   1. Generate a self-signed certificate.
 - TODO: add commands, to use this script
 - Place the certificate somewhere safe on the server. (TODO: where?)
+- HINT: A quick test of TLS configuration by making client connections to the test broker hhttps://test.mosquitto.org
 
 ## Generate Server JWT Secret
 
@@ -30,10 +31,11 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - Create a test JWT that will give test clients access to the full topic tree for all publish ans subscribe messages
 - Run the test script: `python gen-jwt.py -p #, -s #`
 - The JWT will be 3 base64 formatted strings separated by a period (`.`), like this:
-    ```
-    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-    ```
+  ```
+  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+  ```
 - Save the terminal output in in a file, like `jwt_test_root.txt`.
+- HINT: A quick test of JWT structure can be assessed by pasting the JWT into https://jwt.io
 
 ## Generate 2nd Test Client JWT Secret (Restrictive Test)
 
