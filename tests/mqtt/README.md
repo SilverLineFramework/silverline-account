@@ -18,7 +18,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
   1. Generate a self-signed certificate.
 - TODO: add commands, to use this script
 - Place the certificate somewhere safe on the server. (TODO: where?)
-- HINT: A quick test of TLS configuration by making client connections to the test broker hhttps://test.mosquitto.org
+- HINT: A quick test of TLS configuration by making client connections to the test broker https://test.mosquitto.org
 
 ## Generate Server JWT Secret
 
