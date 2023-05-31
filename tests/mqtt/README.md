@@ -34,6 +34,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
     ```
 - Save the terminal output in in a file, like `jwt_test_root.txt`.
+- HINT: A quick test of JWT structure can be assesed by pasting the JWT into https://jwt.io
 
 ## Generate 2nd Test Client JWT Secret (Restrictive Test)
 
