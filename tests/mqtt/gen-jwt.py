@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import jwt
 
 
-def generate_token(username, kid, days, keypath, jsonOut, sub_topics=['#'], pub_topics=['#']):
+def generate_token(username, kid, days, keypath, jsonOut, sub_topics, pub_topics):
     now = datetime.utcnow()
     claim = {
         "sub": username,
@@ -41,6 +41,11 @@ if __name__ == '__main__':
                         help='Number of days the token will be valid (default: 365 days)')
     parser.add_argument('-j', dest='json', action='store_true', default=False,
                         help='Generate json with username (default: false)')
+    parser.add_argument('-s', dest='sub', action='store_true', default='#',
+                        help='Subscribe topic permission (default: #)')
+    parser.add_argument('-p', dest='pub', action='store_true', default='#',
+                        help='Publish topic permission (default: #)')
     args = parser.parse_args()
 
-    generate_token(args.username, args.kid, args.days, args.keypath, args.json)
+    generate_token(args.username, args.kid, args.days, args.keypath,
+                   args.json, sub_topics=[args.sub], pub_topics=[args.pub])
