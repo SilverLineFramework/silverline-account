@@ -1,5 +1,2 @@
-paho-mqtt
-PyJWT
-numpy
 cryptography
-certifi
+PyJWT

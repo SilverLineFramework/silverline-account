@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import jwt
 
 
-def generate_token(username, kid, days, keypath, jsonOut, sub_topics, pub_topics):
+def generate_token(username, alg, kid, days, keypath, jsonOut, sub_topics, pub_topics):
     now = datetime.utcnow()
     claim = {
         "sub": username,
@@ -18,8 +18,11 @@ def generate_token(username, kid, days, keypath, jsonOut, sub_topics, pub_topics
     }
     with open(keypath, 'r') as keyfile:
         key = keyfile.read()
-    token = jwt.encode(claim, key, algorithm='RS256', headers={"kid": kid})
-    outStr = token.decode()
+    if kid:
+        token = jwt.encode(claim, key, algorithm=alg, headers={"kid": kid})
+    else:
+        token = jwt.encode(claim, key, algorithm=alg)
+    outStr = token
     if jsonOut:
         jsonOutObj = {
             "username": username,
@@ -32,20 +35,24 @@ def generate_token(username, kid, days, keypath, jsonOut, sub_topics, pub_topics
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=(
         "Generate JWT service tokens w/ pub/sub rights to all topics and 1 year (default) expiry"))
-    parser.add_argument('username', help='MQTT username for this service')
-    parser.add_argument('-i', dest='kid', required=True,
-                        help='Key id in header (required)')
-    parser.add_argument('-k', dest='keypath', default="mqtt.pem",
+    parser.add_argument('username',
+                        help='MQTT username for this service')
+    parser.add_argument('-a', dest='alg', type=str, default="RS256",
+                        help='Algorithm in header')
+    parser.add_argument('-i', dest='kid', type=str,
+                        help='Key id in header')
+    parser.add_argument('-k', dest='keypath', type=str, default="mqtt.pem",
                         help='Private RSA key file to use (default: "mqtt.pem")')
     parser.add_argument('-d', dest='days', type=int, default="365",
                         help='Number of days the token will be valid (default: 365 days)')
-    parser.add_argument('-j', dest='json', action='store_true', default=False,
+    parser.add_argument('-j', dest='json',  default=False,
                         help='Generate json with username (default: false)')
-    parser.add_argument('-s', dest='sub', action='store_true', default='#',
+    parser.add_argument('-s', dest='sub',  nargs='+', default='#',
                         help='Subscribe topic permission (default: #)')
-    parser.add_argument('-p', dest='pub', action='store_true', default='#',
+    parser.add_argument('-p', dest='pub',  nargs='+', default='#',
                         help='Publish topic permission (default: #)')
     args = parser.parse_args()
+    # print(args)
 
-    generate_token(args.username, args.kid, args.days, args.keypath,
+    generate_token(args.username, args.alg, args.kid, args.days, args.keypath,
                    args.json, sub_topics=[args.sub], pub_topics=[args.pub])
