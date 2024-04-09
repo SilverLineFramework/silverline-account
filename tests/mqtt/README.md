@@ -7,7 +7,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - Install a certificate to encrypt the transport layer between client nodes and the server.
 - There are two main routes depending on what is easy, but #1 is preferred.
   1. Generate a CA-signed certificate using Let's Encrypt, or another domain-approved process that is standard for your organization.
-  1. Generate a self-signed certificate for `localhost` testing, you can do this with `gen-tls-private-ket-crt.sh`.
+  1. Generate a self-signed certificate for `localhost` testing, you can do this with `gen-tls-private-key-crt.sh`.
 - Place the cert and key somewhere safe on the server rather than `./keys`.
 
 ## Generate Server JWT Secret
@@ -20,12 +20,12 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 
 - Install MQTT server: [Mosquitto](https://mosquitto.org)
 - Install Rust authentication plugin: [mosquitto-jwt-auth](https://github.com/wiomoc/mosquitto-jwt-auth)
-- Configure MQTT server to use the options from `server/mosquitto-jwt-auth.conf` using the [configuration file format](https://mosquitto.org/man/mosquitto-conf-5.html).
+  - Configure MQTT server to use the options from [`server/mosquitto-jwt-auth.conf`](server) using the [configuration file format](https://mosquitto.org/man/mosquitto-conf-5.html).
 - **OPTIONAL**: Debug logging of the server using the `log_type debug` config option will allow you to see pub/sub `DENIED` messages, higher logging levels may also work.
 
 ## Generate Client Test JWT (Permissive Root Test)
 - Create a test JWT that will give test clients access to the full topic tree for all publish and subscribe messages
-- Run the test script: `python3 gen-jwt.py -k ./keys/jwt.public.der -p '#' -s '#'`, to create a root token.
+- Run the test script: `python3 gen-jwt.py cli -k ./keys/jwt.public.der -p '#' -s '#'`, to create a root token.
 - The JWT will be 3 base64 formatted strings separated by a period (`.`), like this:
   ```
   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
