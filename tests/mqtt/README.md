@@ -8,13 +8,13 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - There are two main routes depending on what is easy, but #1 is preferred.
   1. Generate a CA-signed certificate using Let's Encrypt, or another domain-approved process that is standard for your organization.
   1. Generate a self-signed certificate for `localhost` testing, you can do this with `gen-tls-private-ket-crt.sh`.
-- Place the certificate somewhere safe on the server. (TODO: where?)
+- Place the cert and key somewhere safe on the server rather than `./keys`.
 
 ## Generate Server JWT Secret
 
 - Generate a set of keys to use to sign and verify JWTs using RS232.
 - Commands, to use this script: `./gen-secret-key.sh`
-- Place the jwt keys somewhere safe on the server. (TODO: where?)
+- Place the jwt keys somewhere safe on the server rather than `./keys`.
 
 ## Install Server MQTT Broker and Auth Plugin
 
