@@ -42,7 +42,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 ## Test Client-Server Setup
 
 - **HINT:** A quick test of TLS configuration by making client connections to the test broker https://test.mosquitto.org
-- Use one of the Python/Java/C client connection samples to consume the JWT:
+- Use one of the Python/Java/C [client connection samples](client) (most languages list APIs for JWTs at https://jwt.io) to consume the JWT:
   - Username: The `sub` field of the JWT
   - Password: The base64-encoded, formatted JWT
   - Client Certificate: `false` (we use the JWT instead)
