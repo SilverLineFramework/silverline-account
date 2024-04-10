@@ -3,6 +3,7 @@ keys/
 *.pem
 *.der
 *.crt
+*.jwt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
