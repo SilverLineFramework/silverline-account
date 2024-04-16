@@ -30,25 +30,24 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - **OPTIONAL**: Debug logging of the server using the `log_type debug` config option will allow you to see pub/sub `DENIED` messages, higher logging levels may also work.
 
 ## Generate Client Test JWT (Permissive Root Test)
+
 - Create a test JWT that will give test clients access to the full topic tree for all publish and subscribe messages
-- Run the test script to create a root JWT:
+- Run the test script to create a root JWT, and save the terminal output in in a file, like `jwt_test_root.jwt`:
   ```shell
-  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p '#' -s '#'
+  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p '#' -s '#' > ./keys/jwt_test_root.jwt
   ```
 - The JWT will be 3 `base64` formatted strings separated by a period (`.`), like this:
   ```
   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
   ```
-- Save the terminal output in in a file, like `jwt_test_root.jwt`.
 
 ## Generate Client 2nd Test JWT Secret (Restrictive Test)
 
-- Create a test JWT will give test clients access to limited topics, and denials on other topics can be tested.
-- Run the test script:
+- Create a test JWT will give test clients access to limited topics, and denials on other topics can be tested (**NOTE**: multiple topics can be added).
+- Run the test script, and save the terminal output in in a file, like `jwt_test_restrict.jwt`.
   ```shell
-  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p 'realm/proc/stdin' -s 'realm/proc/stdout'
+  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p 'realm/proc/stdin' -s 'realm/proc/debug' 'realm/proc/stdout' > ./keys/jwt_test_restrict.jwt
   ```
-- Save the terminal output in in a file, like `jwt_test_restrict.jwt`.
 - **FUTURE WORK:** Eventually we will deploy a Silverline User Authentication Server with a secure UI and endpoints to generate these JWTs against a User DB ACL.
 
 ## Test Client-Server Setup
@@ -65,6 +64,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 
 ## Debug Client JWT header, payload, and signature
 
+- A remote test of JWT structure can be assessed by pasting the JWT into the page at https://jwt.io.
 - A number of VS Code JWT Decoder plug ins can also help. We tried out [jflbr.jwt-decoder](https://marketplace.visualstudio.com/items?itemName=jflbr.jwt-decoder).
 - A local test of the payload can be shown via the helper JWT display script `show-jwt.sh`, using a file containing the JWT, or the full JWT:
   ```shell
@@ -87,4 +87,3 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
   }
   Signature: SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
   ```
-- A remote test of JWT structure can be assessed by pasting the JWT into the page at https://jwt.io.
