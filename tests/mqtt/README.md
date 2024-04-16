@@ -33,7 +33,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - Create a test JWT that will give test clients access to the full topic tree for all publish and subscribe messages
 - Run the test script to create a root JWT:
   ```shell
-  python3 gen-jwt.py cli -k ./keys/jwt.priv.pem -p '#' -s '#'
+  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p '#' -s '#'
   ```
 - The JWT will be 3 `base64` formatted strings separated by a period (`.`), like this:
   ```
@@ -46,7 +46,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - Create a test JWT will give test clients access to limited topics, and denials on other topics can be tested.
 - Run the test script:
   ```shell
-  python3 gen-jwt.py cli -k ./keys/jwt.priv.pem -p 'realm/proc/stdin' -s 'realm/proc/stdout'
+  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p 'realm/proc/stdin' -s 'realm/proc/stdout'
   ```
 - Save the terminal output in in a file, like `jwt_test_restrict.jwt`.
 - **FUTURE WORK:** Eventually we will deploy a Silverline User Authentication Server with a secure UI and endpoints to generate these JWTs against a User DB ACL.
