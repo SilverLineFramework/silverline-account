@@ -65,6 +65,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 
 ## Debug Client JWT header, payload, and signature
 
+- A number of VS Code JWT Decoder plug ins can also help. We tried out [jflbr.jwt-decoder](https://marketplace.visualstudio.com/items?itemName=jflbr.jwt-decoder).
 - A local test of the payload can be shown via the helper JWT display script `show-jwt.sh`, using a file containing the JWT, or the full JWT:
   ```shell
   ./show-jwt.sh ./jwt_test_root.txt
