@@ -11,8 +11,8 @@ def generate_token(username, alg, kid, days, keypath, jsonOut, sub_topics, pub_t
     now = datetime.utcnow()
     claim = {
         "sub": username,
-        "subs": sub_topics,
-        "publ": pub_topics,
+        "subs": sub_topics[0],
+        "publ": pub_topics[0],
         'iat': now,
         'exp': now + timedelta(days=days)
     }

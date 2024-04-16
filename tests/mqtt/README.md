@@ -9,7 +9,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
   1. Generate a CA-signed certificate using Let's Encrypt, or another domain-approved process that is standard for your organization.
   1. Generate a self-signed certificate for `localhost` testing, you can do this with:
     ```shell
-    ./gen-tls-private-key-crt.sh
+    ./gen-tls-private-key-cert.sh
     ```
 - Place the cert and key somewhere safe on the server rather than `./keys`.
 
@@ -18,7 +18,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - Generate a set of keys to use to sign and verify JWTs using RS232.
 - Use this script to generate JWT keys:
   ```shell
-  ./gen-secret-key.sh
+  ./gen-jwt-secret-key.sh
   ```
 - Place the jwt keys somewhere safe on the server rather than `./keys`.
 

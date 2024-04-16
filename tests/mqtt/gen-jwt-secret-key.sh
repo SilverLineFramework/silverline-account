@@ -3,7 +3,7 @@
 KEY_OUT_PATH=keys
 
 echo -e "\n### Creating RSA key pair for JWT. This will replace old keys (if exist; backup will be in $KEY_OUT_PATH/jwt.private.pem.bak)."
-read -p "Create RSA key pair fir JWT? (y/N) " -r
+read -p "Create RSA key pair for JWT? (y/N) " -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
   mkdir -p $KEY_OUT_PATH
   [ -f $KEY_OUT_PATH/jwt.private.pem ] && cp $KEY_OUT_PATH/jwt.private.pem $KEY_OUT_PATH/jwt.private.pem.bak
