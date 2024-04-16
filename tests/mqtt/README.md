@@ -36,6 +36,10 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
   ```shell
   python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p '#' -s '#' > ./keys/jwt_test_root.jwt
   ```
+  or in json format:
+    ```shell
+  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p '#' -s '#' -j > ./keys/jwt_test_root.json
+  ```
 - The JWT will be 3 `base64` formatted strings separated by a period (`.`), like this:
   ```
   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
@@ -46,7 +50,7 @@ We currently use the RS256 algorithm for signing and verifying JWTs, and so a pr
 - Create a test JWT will give test clients access to limited topics, and denials on other topics can be tested (**NOTE**: multiple topics can be added).
 - Run the test script, and save the terminal output in in a file, like `jwt_test_restrict.jwt`.
   ```shell
-  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p 'realm/proc/stdin' -s 'realm/proc/debug' 'realm/proc/stdout' > ./keys/jwt_test_restrict.jwt
+  python3 gen-jwt.py cli -k ./keys/jwt.private.pem -p 'realm/proc/stdin/#' -s 'realm/proc/debug/#' 'realm/proc/stdout/#' > ./keys/jwt_test_restrict.jwt
   ```
 - **FUTURE WORK:** Eventually we will deploy a Silverline User Authentication Server with a secure UI and endpoints to generate these JWTs against a User DB ACL.
 

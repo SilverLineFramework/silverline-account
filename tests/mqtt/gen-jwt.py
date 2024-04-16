@@ -34,22 +34,22 @@ def generate_token(username, alg, kid, days, keypath, jsonOut, sub_topics, pub_t
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=(
-        "Generate JWT service tokens w/ pub/sub rights to all topics and 1 year (default) expiry"))
+        "Generate JWT service tokens (default: pub/sub rights to all topics and 1 year  expiry)"))
     parser.add_argument('username',
                         help='MQTT username for this service')
     parser.add_argument('-a', dest='alg', type=str, default="RS256",
-                        help='Algorithm in header')
+                        help='Algorithm in header (default: "RS256")')
     parser.add_argument('-i', dest='kid', type=str,
-                        help='Key id in header')
+                        help='Key id in header(default: null)')
     parser.add_argument('-k', dest='keypath', type=str, default="mqtt.pem",
                         help='Private RSA key file to use (default: "mqtt.pem")')
     parser.add_argument('-d', dest='days', type=int, default="365",
                         help='Number of days the token will be valid (default: 365 days)')
-    parser.add_argument('-j', dest='json',  default=False,
+    parser.add_argument('-j', dest='json', action='store_true', default=False,
                         help='Generate json with username (default: false)')
-    parser.add_argument('-s', dest='sub',  nargs='+', default='#',
+    parser.add_argument('-s', dest='sub', nargs='+', default='#',
                         help='Subscribe topic permission (default: #)')
-    parser.add_argument('-p', dest='pub',  nargs='+', default='#',
+    parser.add_argument('-p', dest='pub', nargs='+', default='#',
                         help='Publish topic permission (default: #)')
     args = parser.parse_args()
     # print(args)
