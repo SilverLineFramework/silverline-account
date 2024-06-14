@@ -19,7 +19,8 @@ class Silverline {
             // CA-signed
             clientOptions
                     .setSsl(true)
-                    .setTrustAll(true);
+                    .setTrustAll(true)
+                    .setSslEngineOptions(new JdkSSLEngineOptions()); // line needed to prevent a protocol version error with the broker
         } else {
             // self-signed
             // Are other options needed to avoid verification?
