@@ -9,7 +9,7 @@
 
 #define CLIENTID "ExampleClientSilverline"
 
-int client_connect(char *host, char *token, char *password, bool verify)
+int client_connect(char *host, char *username, char *token, bool verify)
 {
     MQTTClient client;
     MQTTClient_connectOptions conn_opts = MQTTClient_connectOptions_initializer;
@@ -25,8 +25,8 @@ int client_connect(char *host, char *token, char *password, bool verify)
 
     conn_opts.ssl = ssl_opts;
     conn_opts.cleansession = 1;
-    conn_opts.username = &token;
-    conn_opts.password = &password;
+    conn_opts.username = &username;
+    conn_opts.password = &token;
 
     if ((rc = MQTTClient_connect(client, &conn_opts)) != MQTTCLIENT_SUCCESS)
     {
